@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How the SCOPE Equation Works</title>
   <style>
+    /* Base styles for page layout */
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
@@ -44,10 +45,16 @@
       text-align: center;
       margin-top: 2rem;
     }
+
+    /* Responsive table container: allow horizontal scrolling on small screens */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1.5rem 0;
+      min-width: 600px; /* ensure table has intrinsic width to slide */
     }
     table, th, td {
       border: 1px solid #ccc;
@@ -60,6 +67,8 @@
       background: #2a597e;
       color: #fff;
     }
+
+    /* Adjust padding for smaller screens */
     @media (max-width: 600px) {
       .container {
         padding: 1rem;
@@ -80,45 +89,47 @@
 
     <main>
       <h2>Acknowledgements and Evolution</h2>
-      <p>The SCOPE model builds on the pioneering work of <strong>Peter J. Carroll</strong>, whose chaos‑magic equations describe how an act of magic can shift probabilities.  In <em>Liber Kaos</em> and <em>Liber Null & Psychonaut</em>, Carroll defined magical power (M) as the product of gnosis, link, the complement of awareness and the complement of resistance (M = G × L × (1 − A) × (1 − R)), and he showed that spells adjust a natural probability P via <em>P<sub>m</sub> = P + (1 − P) × M<sup>1/P</sup></em> [oai_citation:0‡hyperritual.com](https://hyperritual.com/blog/magical-probability-calculator/#:~:text=1,1%20%E2%88%92%20P).  In later works he simplified M to the product of gnosis, link, subliminalisation and belief [oai_citation:1‡hyperritual.com](https://hyperritual.com/blog/magical-probability-calculator/#:~:text=1,1%2C%20and%20all%20multiplied%20together).</p>
-      <p>The <strong>SCOPE</strong> framework honours these foundations while extending them.  It expands the efficacy term into a richer set of psychological and practical factors—attention, belief, non‑attachment, inner resistance, skill, sympathetic link, representation, coordination, vitality and environmental noise—so the model can accommodate diverse ritual traditions and emphasize practice and health.  Where Carroll’s formula used a power function, SCOPE treats efficacy as a simple product of factors and updates the probability via <strong>P* = P + (1 − P) × Ψ</strong>.  This keeps the equation linear in Ψ and makes it easier to calibrate from logged data.</p>
-      <p>By inviting practitioners to score each variable and record outcomes over time, SCOPE turns abstract magic into a <em>second‑order control system</em>: you learn which elements matter most for you, refine your κ (calibration) value, and set realistic expectations based on empirical feedback.  Rather than promise miracles, this model shows how modest improvements in focus, belief, skill, coordination or vitality can nudge probabilities upward in measurable ways.</p>
+      <p>The SCOPE model builds on the pioneering work of <strong>Peter J. Carroll</strong>, whose chaos‑magic equations describe how an act of magic can shift probabilities. In <em>Liber Kaos</em> and <em>Liber Null & Psychonaut</em>, Carroll defined magical power (M) as the product of gnosis, link, the complement of awareness and the complement of resistance (M = G × L × (1 − A) × (1 − R)), and he showed that spells adjust a natural probability P via <em>P<sub>m</sub> = P + (1 − P) × M<sup>1/P</sup></em> [oai_citation:0‡hyperritual.com](https://hyperritual.com/blog/magical-probability-calculator/#:~:text=1,1%20%E2%88%92%20P). In later works he simplified M to the product of gnosis, link, subliminalisation and belief [oai_citation:1‡hyperritual.com](https://hyperritual.com/blog/magical-probability-calculator/#:~:text=1,1%2C%20and%20all%20multiplied%20together).</p>
+      <p>The <strong>SCOPE</strong> framework honours these foundations while extending them. It expands the efficacy term into a richer set of psychological and practical factors—attention, belief, non‑attachment, inner resistance, skill, sympathetic link, representation, coordination, vitality and environmental noise—so the model can accommodate diverse ritual traditions and emphasize practice and health. Where Carroll’s formula used a power function, SCOPE treats efficacy as a simple product of factors and updates the probability via <strong>P* = P + (1 − P) × Ψ</strong>. This keeps the equation linear in Ψ and makes it easier to calibrate from logged data.</p>
+      <p>By inviting practitioners to score each variable and record outcomes over time, SCOPE turns abstract magic into a <em>second‑order control system</em>: you learn which elements matter most for you, refine your κ (calibration) value, and set realistic expectations based on empirical feedback. Rather than promise miracles, this model shows how modest improvements in focus, belief, skill, coordination or vitality can nudge probabilities upward in measurable ways.</p>
 
       <h2>The Equation Overview</h2>
-      <p>All factors combine multiplicatively to produce <strong>Ψ (efficacy)</strong>, which then modifies the baseline probability <strong>P</strong> into <strong>P*</strong> (Enchanted Probability).</p>
+      <p>All factors combine multiplicatively to produce <strong>Ψ (efficacy)</strong>, which then modifies the baseline probability <strong>P</strong> into <strong>P*</strong> (Enchanted Probability).</p>
 
-      <table>
-        <tr>
-          <th colspan="3">Ψ (efficacy)</th>
-        </tr>
-        <tr>
-          <td>κ (calibration)</td>
-          <td>× Internal Alignment (H)</td>
-          <td>× External Engagement (X)</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>(A_focus × B_belief × (1−D_attach) × (1−R_res))</td>
-          <td>(S_skill × L_link × R_repr × C_coord)</td>
-        </tr>
-        <tr>
-          <td colspan="3">× Vitality (V) × Noise (Q)</td>
-        </tr>
-      </table>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th colspan="3">Ψ (efficacy)</th>
+          </tr>
+          <tr>
+            <td>κ (calibration)</td>
+            <td>× Internal Alignment (H)</td>
+            <td>× External Engagement (X)</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>(A_focus × B_belief × (1−D_attach) × (1−R_res))</td>
+            <td>(S_skill × L_link × R_repr × C_coord)</td>
+          </tr>
+          <tr>
+            <td colspan="3">× Vitality (V) × Noise (Q)</td>
+          </tr>
+        </table>
+      </div>
 
       <p><strong>P* = P + (1 – P) × Ψ</strong></p>
 
       <h2>Meta Information</h2>
-      <p><strong>Date, Location, Tradition</strong> — Context for your ritual; these details help you spot patterns in effectiveness.</p>
+      <p><strong>Date, Location, Tradition</strong> — Context for your ritual; these details help you later spot patterns (for example, certain places or traditions being more effective).</p>
       <p><strong>Goal Statement</strong> — A clear description of your intent in the present tense.</p>
-      <p><strong>Reference Class (Baseline)</strong> — A comparable situation without magical action (your control group).  For example, “Normally this pitch has a 1 in 3 chance.”</p>
+      <p><strong>Reference Class (Baseline)</strong> — A comparable situation without magical action (your control group). For example, “Normally this pitch has a 1 in 3 chance.”</p>
       <p><strong>Baseline Probability P</strong> — A numeric estimate (0–1) of how likely the event is naturally, before magical influence.</p>
 
       <h2>Internal Alignment (H)</h2>
       <p><strong>Attention (A_focus)</strong> — How focused and absorbed you are in the intention; higher attention = stronger signal.</p>
       <p><strong>Belief (B_belief)</strong> — Your confidence in the operation’s success; expectancy effects are powerful amplifiers.</p>
-      <p><strong>Attachment (D_attach)</strong> — Excess desire or “lust of result.”  The tracker uses (1 – D_attach) so that letting go increases effectiveness.</p>
-      <p><strong>Resistance (R_res)</strong> — Inner doubts or conflicts.  The tracker uses (1 – R_res); clearing doubts improves results.</p>
+      <p><strong>Attachment (D_attach)</strong> — Excess desire or “lust of result.” The tracker uses (1 – D_attach) so that letting go increases effectiveness.</p>
+      <p><strong>Resistance (R_res)</strong> — Inner doubts or conflicts. The tracker uses (1 – R_res); clearing doubts improves results.</p>
 
       <h2>External Engagement (X)</h2>
       <p><strong>Skill (S_skill)</strong> — Your proficiency in the ritual techniques used.</p>
@@ -127,14 +138,14 @@
       <p><strong>Coordination (C_coord)</strong> — Synchrony of group action if working with others; higher coordination boosts group efficacy.</p>
 
       <h2>Supporting Factors</h2>
-      <p><strong>Vitality (V)</strong> — Your physical and mental energy.  A strong body and rested mind boost concentration and confidence.</p>
+      <p><strong>Vitality (V)</strong> — Your physical and mental energy. A strong body and rested mind boost concentration and confidence.</p>
       <p><strong>Noise (Q)</strong> — External and internal distractions that reduce signal strength; lower noise = clearer signal.</p>
-      <p><strong>κ (kappa)</strong> — A calibration constant unique to you.  Start with κ = 1; after logging 15–20 rituals, update it to reflect your observed average uplift.</p>
+      <p><strong>κ (kappa)</strong> — A calibration constant unique to you. Start with κ = 1; after logging 15–20 rituals, update it to reflect your observed average uplift.</p>
 
       <h2>Outputs</h2>
-      <p><strong>Ψ (efficacy)</strong> — The combined effectiveness score the tracker calculates.  It multiplies all your chosen values, adjusted by κ and noise.</p>
-      <p><strong>P* (Enchanted Probability)</strong> — The baseline probability P adjusted by Ψ.  If Ψ = 0, nothing changes; if Ψ &gt; 0, P* increases but never exceeds 1.</p>
-      <p>Because Ψ is multiplicative, improvements to the lowest‑scored factor often yield the biggest gain.  Prioritise the smallest slider first when iterating your practice.</p>
+      <p><strong>Ψ (efficacy)</strong> — The combined effectiveness score the tracker calculates. It multiplies all your chosen values, adjusted by κ and noise.</p>
+      <p><strong>P* (Enchanted Probability)</strong> — The baseline probability P adjusted by Ψ. If Ψ = 0, nothing changes; if Ψ > 0, P* increases but never exceeds 1.</p>
+      <p>Because Ψ is multiplicative, improvements to the lowest‑scored factor often yield the biggest gain. Prioritise the smallest slider first when iterating your practice.</p>
     </main>
 
     <footer>
