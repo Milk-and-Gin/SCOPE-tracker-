@@ -8,12 +8,17 @@
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      margin: 20px;
       background-color: #f5f5f5;
       color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
       max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     header {
       text-align: center;
@@ -36,48 +41,89 @@
       text-decoration: none;
       font-weight: bold;
     }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: center;
+    }
+    th {
+      background: #2a597e;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>How the SCOPE Equation Works</h1>
-    <p>This guide explains each field in the tracker and how it contributes to the calculation of magical efficacy and probability shift.</p>
-    <p><a href="index.html" class="button">← Back to Tracker</a></p>
-  </header>
+  <div class="container">
+    <header>
+      <h1>How the SCOPE Equation Works</h1>
+      <p>This guide explains each field in the tracker and how it contributes to magical efficacy (Ψ) and probability shift (P*).</p>
+      <p><a href="index.html" class="button">← Back to Tracker</a></p>
+    </header>
 
-  <main>
-    <h2>Meta Information</h2>
-    <p><strong>Date, Location, Tradition</strong> — Context for your ritual. These details help you later spot patterns (e.g. certain places or traditions being more effective).</p>
-    <p><strong>Goal Statement</strong> — A clear description of your intent in the present tense.</p>
-    <p><strong>Reference Class (Baseline)</strong> — The comparable situation without magical action (your control group). For example: “Normally this pitch has a 1 in 3 chance.”</p>
-    <p><strong>Baseline Probability P</strong> — A numeric estimate (0–1) of how likely the event is naturally, before magical influence.</p>
+    <main>
+      <h2>The Equation Overview</h2>
+      <p>All factors combine multiplicatively to produce <strong>Ψ (efficacy)</strong>, which then modifies the baseline probability <strong>P</strong> into <strong>P*</strong> (Enchanted Probability).</p>
 
-    <h2>Internal Alignment (H)</h2>
-    <p><strong>Attention (A_focus)</strong> — How focused and absorbed you are in the intention. Higher attention = stronger signal.</p>
-    <p><strong>Belief (B_belief)</strong> — Your confidence in the operation’s success. Expectancy effects are powerful amplifiers.</p>
-    <p><strong>Attachment (D_attach)</strong> — The degree of “lust of result.” High attachment harms efficacy. The tracker inverts this (using 1 – D_attach) so that letting go increases effectiveness.</p>
-    <p><strong>Resistance (R_res)</strong> — Inner doubts or conflicts. High resistance reduces outcomes. The tracker uses (1 – R_res), so clearing doubts improves results.</p>
+      <table>
+        <tr>
+          <th colspan="3">Ψ (efficacy)</th>
+        </tr>
+        <tr>
+          <td>κ (calibration)</td>
+          <td>× Internal Alignment (H)</td>
+          <td>× External Engagement (X)</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>(A_focus × B_belief × (1–D_attach) × (1–R_res))</td>
+          <td>(S_skill × L_link × R_repr × C_coord)</td>
+        </tr>
+        <tr>
+          <td colspan="3">× Vitality (V) × Noise (Q)</td>
+        </tr>
+      </table>
 
-    <h2>External Engagement (X)</h2>
-    <p><strong>Skill (S_skill)</strong> — Your proficiency in the ritual technologies used.</p>
-    <p><strong>Link (L_link)</strong> — How directly your ritual connects to the target (personal items, names, astrological charts, etc.).</p>
-    <p><strong>Representation (R_repr)</strong> — The clarity and resonance of your symbols, sigils, or talismans.</p>
-    <p><strong>Coordination (C_coord)</strong> — The synchrony of group action if working with others (drumming, chanting, movement). High coordination boosts group efficacy.</p>
+      <p>Then:</p>
+      <p><strong>P* = P + (1 – P) × Ψ</strong></p>
 
-    <h2>Supporting Factors</h2>
-    <p><strong>Vitality (V)</strong> — Your physical and mental energy. A strong body and rested mind boost concentration and confidence.</p>
-    <p><strong>Noise (Q)</strong> — External and internal distractions that reduce signal strength. Lower noise = clearer signal.</p>
-    <p><strong>κ (kappa)</strong> — A calibration constant unique to you. Start with κ = 1. After logging 15–20 rituals, update it to reflect your observed average uplift.</p>
+      <h2>Meta Information</h2>
+      <p><strong>Date, Location, Tradition</strong> — Context for your ritual.</p>
+      <p><strong>Goal Statement</strong> — A clear description of your intent in the present tense.</p>
+      <p><strong>Reference Class (Baseline)</strong> — The comparable situation without magical action.</p>
+      <p><strong>Baseline Probability P</strong> — Numeric estimate (0–1) of how likely the event is naturally.</p>
 
-    <h2>Outputs</h2>
-    <p><strong>Ψ (efficacy)</strong> — This is the combined effectiveness score the tracker calculates. It multiplies all your chosen values, adjusted by κ and noise, to give a single measure of magical “signal strength.”</p>
-    <p><strong>Enchanted Probability P*</strong> — This is the baseline probability P adjusted by Ψ. It represents the new chance of success after magical influence:  
-      <br><code>P* = P + (1 – P) × Ψ</code></p>
-    <p>If Ψ = 0, nothing changes. If Ψ > 0, the probability increases (though it never exceeds 1). This shows how strong alignment across all variables can bend outcomes.</p>
-  </main>
+      <h2>Inputs</h2>
+      <p><strong>Attention (A_focus)</strong> — How focused and absorbed you are in the intention.</p>
+      <p><strong>Belief (B_belief)</strong> — Your confidence in the operation’s success.</p>
+      <p><strong>Attachment (D_attach)</strong> — Excess desire or “lust of result.” Tracker uses 1 – D_attach.</p>
+      <p><strong>Resistance (R_res)</strong> — Inner doubt or conflict. Tracker uses 1 – R_res.</p>
+      <p><strong>Skill (S_skill)</strong> — Your ritual proficiency.</p>
+      <p><strong>Link (L_link)</strong> — The strength of the sympathetic/magical connection.</p>
+      <p><strong>Representation (R_repr)</strong> — Clarity and resonance of your symbols or talismans.</p>
+      <p><strong>Coordination (C_coord)</strong> — Synchrony of group action if applicable.</p>
+      <p><strong>Vitality (V)</strong> — Your physical and mental energy.</p>
+      <p><strong>Noise (Q)</strong> — Internal and external distractions reducing efficacy.</p>
+      <p><strong>κ (kappa)</strong> — A calibration constant unique to you.</p>
 
-  <footer>
-    <p><a href="index.html" class="button">← Back to Tracker</a></p>
-  </footer>
+      <h2>Outputs</h2>
+      <p><strong>Ψ (efficacy)</strong> — Combined score representing the strength of magical alignment.</p>
+      <p><strong>P* (Enchanted Probability)</strong> — The updated probability of success after magical influence. If Ψ = 0, nothing changes. If Ψ > 0, P* increases but never exceeds 1.</p>
+    </main>
+
+    <footer>
+      <p><a href="index.html" class="button">← Back to Tracker</a></p>
+    </footer>
+  </div>
 </body>
 </html>
