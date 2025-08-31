@@ -61,13 +61,12 @@
       color: #fff;
     }
 
-    /* ✅ Mobile tweaks */
     @media (max-width: 600px) {
       .container {
-        padding: 1rem;   /* adds breathing room on small screens */
+        padding: 1rem;
       }
       body {
-        background: #fff; /* avoid boxed look on very small screens */
+        background: #fff;
       }
     }
   </style>
@@ -107,31 +106,31 @@
       <p><strong>P* = P + (1 – P) × Ψ</strong></p>
 
       <h2>Meta Information</h2>
-      <p><strong>Date, Location, Tradition</strong> — Context for your ritual. These details help you later spot patterns (e.g. certain places or traditions being more effective).</p>
+      <p><strong>Date, Location, Tradition</strong> — Context for your ritual. These details help you later spot patterns.</p>
       <p><strong>Goal Statement</strong> — A clear description of your intent in the present tense.</p>
-      <p><strong>Reference Class (Baseline)</strong> — The comparable situation without magical action (your control group). For example: “Normally this pitch has a 1 in 3 chance.”</p>
+      <p><strong>Reference Class (Baseline)</strong> — The comparable situation without magical action (your control group).</p>
       <p><strong>Baseline Probability P</strong> — A numeric estimate (0–1) of how likely the event is naturally, before magical influence.</p>
 
       <h2>Internal Alignment (H)</h2>
-      <p><strong>Attention (A_focus)</strong> — How focused and absorbed you are in the intention. Higher attention = stronger signal.</p>
-      <p><strong>Belief (B_belief)</strong> — Your confidence in the operation’s success. Expectancy effects are powerful amplifiers.</p>
-      <p><strong>Attachment (D_attach)</strong> — The degree of “lust of result.” High attachment harms efficacy. The tracker inverts this (using 1 – D_attach) so that letting go increases effectiveness.</p>
-      <p><strong>Resistance (R_res)</strong> — Inner doubts or conflicts. High resistance reduces outcomes. The tracker uses (1 – R_res), so clearing doubts improves results.</p>
+      <p><strong>Attention (A_focus)</strong> — How focused and absorbed you are in the intention.</p>
+      <p><strong>Belief (B_belief)</strong> — Your confidence in the operation’s success.</p>
+      <p><strong>Attachment (D_attach)</strong> — Excess desire or “lust of result.” The tracker uses (1 – D_attach).</p>
+      <p><strong>Resistance (R_res)</strong> — Inner doubts or conflicts. The tracker uses (1 – R_res).</p>
 
       <h2>External Engagement (X)</h2>
-      <p><strong>Skill (S_skill)</strong> — Your proficiency in the ritual technologies used.</p>
-      <p><strong>Link (L_link)</strong> — How directly your ritual connects to the target (personal items, names, astrological charts, etc.).</p>
-      <p><strong>Representation (R_repr)</strong> — The clarity and resonance of your symbols, sigils, or talismans.</p>
-      <p><strong>Coordination (C_coord)</strong> — The synchrony of group action if working with others (drumming, chanting, movement). High coordination boosts group efficacy.</p>
+      <p><strong>Skill (S_skill)</strong> — Your proficiency in ritual methods.</p>
+      <p><strong>Link (L_link)</strong> — Strength of the magical/sympathetic link.</p>
+      <p><strong>Representation (R_repr)</strong> — Clarity and resonance of your symbols.</p>
+      <p><strong>Coordination (C_coord)</strong> — Synchrony in group workings.</p>
 
       <h2>Supporting Factors</h2>
-      <p><strong>Vitality (V)</strong> — Your physical and mental energy. A strong body and rested mind boost concentration and confidence.</p>
-      <p><strong>Noise (Q)</strong> — External and internal distractions that reduce signal strength. Lower noise = clearer signal.</p>
-      <p><strong>κ (kappa)</strong> — A calibration constant unique to you. Start with κ = 1. After logging 15–20 rituals, update it to reflect your observed average uplift.</p>
+      <p><strong>Vitality (V)</strong> — Your physical and mental energy.</p>
+      <p><strong>Noise (Q)</strong> — External and internal distractions that reduce signal strength.</p>
+      <p><strong>κ (kappa)</strong> — Calibration constant you refine over time.</p>
 
       <h2>Outputs</h2>
-      <p><strong>Ψ (efficacy)</strong> — Combined score representing the strength of magical alignment. This is auto-calculated at the bottom of the tracker based on all your inputs.</p>
-      <p><strong>P* (Enchanted Probability)</strong> — The updated probability of success after magical influence: <br><code>P* = P + (1 – P) × Ψ</code>. This is shown automatically in the tracker once you input your values. If Ψ = 0, nothing changes. If Ψ > 0, P* increases but never exceeds 1.</p>
+      <p><strong>Ψ (efficacy)</strong> — Combined score representing alignment. Auto-calculated in the tracker.</p>
+      <p><strong>P* (Enchanted Probability)</strong> — The updated probability: <br><code>P* = P + (1 – P) × Ψ</code>. Displayed automatically in the tracker after inputs.</p>
     </main>
 
     <footer>
