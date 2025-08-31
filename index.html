@@ -1,134 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SCOPE Ritual Tracker</title>
-    <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>SCOPE Ritual Tracker</h1>
-      <p>Record your ritual parameters, compute probabilities and track outcomes.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCOPE Ritual Tracker</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>SCOPE Ritual Tracker</h1>
+    <p>Record your ritual parameters, compute probabilities and track outcomes.</p>
 
-      <!-- ✅ Button placed right below the header text -->
-      <p style="text-align:center; margin-top:1rem;">
-        <a href="https://www.milkandgin.co.uk/scope" target="_blank"
-           style="background-color:#2a597e; 
-                  color:#fff; 
-                  padding:0.75rem 1.25rem; 
-                  border-radius:6px; 
-                  text-decoration:none; 
-                  font-weight:bold;">
-          📄 Read More About SCOPE
-        </a>
-      </p>
-    </header>
+    <!-- Button linking to your Wix page -->
+    <p style="text-align:center; margin-top:1rem;">
+      <a href="https://www.milkandgin.co.uk/scope" target="_blank"
+         style="background-color:#2a597e; 
+                color:#fff; 
+                padding:0.75rem 1.25rem; 
+                border-radius:6px; 
+                text-decoration:none; 
+                font-weight:bold;">
+        📄 Read More About SCOPE
+      </a>
+    </p>
+  </header>
 
-    <main>
-      <form id="scope-form">
-        <fieldset>
-          <legend>Meta Information</legend>
-          <label>
-            Date:
-            <input type="date" id="date" required />
-          </label>
-          <label>
-            Location:
-            <input type="text" id="location" placeholder="e.g. London" />
-          </label>
-          <label>
-            Tradition:
-            <input type="text" id="tradition" placeholder="e.g. Vodou, Chaos, Hoodoo" />
-          </label>
-          <label class="full-width">
-            Goal statement:
-            <input type="text" id="goal" placeholder="Describe your intention" required />
-          </label>
-          <label class="full-width">
-            Reference class (baseline description):
-            <textarea id="refClass" rows="2" placeholder="What makes this situation similar/different?"></textarea>
-          </label>
-          <label>
-            Baseline Probability P (0–1):
-            <input type="number" id="baselineP" min="0" max="1" step="0.01" value="0.5" required />
-          </label>
-        </fieldset>
+  <main>
+    <form id="scope-form">
+      <fieldset>
+        <legend>Meta Information</legend>
+        <label>
+          Date:
+          <input type="date" id="date" required />
+        </label>
+        <label>
+          Location:
+          <input type="text" id="location" placeholder="e.g. London" />
+        </label>
+        <label>
+          Tradition:
+          <input type="text" id="tradition" placeholder="e.g. Vodou, Chaos, Hoodoo" />
+        </label>
+        <label class="full-width">
+          Goal statement:
+          <input type="text" id="goal" placeholder="Describe your intention" required />
+        </label>
+        <label class="full-width">
+          Reference class (baseline description):
+          <textarea id="refClass" rows="2" placeholder="What makes this situation similar/different?"></textarea>
+        </label>
+        <label>
+          Baseline Probability P (0–1):
+          <input type="number" id="baselineP" min="0" max="1" step="0.01" value="0.5" required />
+        </label>
+      </fieldset>
 
-        <fieldset>
-          <legend>Inputs (0–1 scale)</legend>
-          <label>
-            Attention A_focus:
-            <input type="number" id="aFocus" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Belief B_belief:
-            <input type="number" id="bBelief" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Attachment D_attach:
-            <input type="number" id="dAttach" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Resistance R_res:
-            <input type="number" id="rRes" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Skill S_skill:
-            <input type="number" id="sSkill" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Link L_link:
-            <input type="number" id="lLink" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Representation R_repr:
-            <input type="number" id="rRepr" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Coordination C_coord:
-            <input type="number" id="cCoord" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Vitality V:
-            <input type="number" id="vVitality" min="0" max="1" step="0.01" value="0.0" />
-          </label>
-          <label>
-            Noise Q:
-            <input type="number" id="qNoise" min="0" max="1" step="0.01" value="1.0" />
-          </label>
-          <label>
-            κ (kappa):
-            <input type="number" id="kappa" min="0" max="10" step="0.01" value="1.0" />
-          </label>
-        </fieldset>
+      <fieldset>
+        <legend>Inputs (0–1 scale)</legend>
+        <label>Attention A_focus:
+          <input type="number" id="aFocus" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Belief B_belief:
+          <input type="number" id="bBelief" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Attachment D_attach:
+          <input type="number" id="dAttach" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Resistance R_res:
+          <input type="number" id="rRes" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Skill S_skill:
+          <input type="number" id="sSkill" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Link L_link:
+          <input type="number" id="lLink" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Representation R_repr:
+          <input type="number" id="rRepr" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Coordination C_coord:
+          <input type="number" id="cCoord" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Vitality V:
+          <input type="number" id="vVitality" min="0" max="1" step="0.01" value="0.0" />
+        </label>
+        <label>Noise Q:
+          <input type="number" id="qNoise" min="0" max="1" step="0.01" value="1.0" />
+        </label>
+        <label>κ (kappa):
+          <input type="number" id="kappa" min="0" max="10" step="0.01" value="1.0" />
+        </label>
+      </fieldset>
 
-        <fieldset id="outputs">
-          <legend>Outputs</legend>
-          <p>
-            Ψ (efficacy): <span id="psi">0.00</span>
-          </p>
-          <p>
-            Enchanted Probability P*: <span id="pStar">0.00</span>
-          </p>
-        </fieldset>
+      <fieldset id="outputs">
+        <legend>Outputs</legend>
+        <p>Ψ (efficacy): <span id="psi">0.00</span></p>
+        <p>Enchanted Probability P*: <span id="pStar">0.00</span></p>
+      </fieldset>
 
-        <div class="buttons">
-          <button type="submit" id="save">Save Entry</button>
-          <button type="button" id="export">Export Data</button>
-        </div>
-      </form>
-      <p id="status"></p>
-    </main>
-
-    <footer>
-      <p class="small">
-        Improvements to the lowest-scored factor yield the biggest gain. Use this form to
-        prioritise your practice and calibrate κ after 15–20 rituals.
-      </p>
-    </footer>
-
-    <script src="main.js" defer></script>
-  </body>
-</html>
+      <div class="buttons">
+        <button type="submit" id="save">Save Entry</button>
+       
