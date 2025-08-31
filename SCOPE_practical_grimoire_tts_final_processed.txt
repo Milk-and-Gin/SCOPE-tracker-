@@ -85,3 +85,33 @@ Examples
 Conclusion
 ----------
 SCOPE reframes magic as a practical tool for influencing probabilities through disciplined mindset and action.  By understanding and tuning the components of the model—attention, belief, non‑attachment, resistance, skill, link, representation, coordination, health and fitness, and noise—you can tilt circumstances in your favour.  Use this guide to develop your own practices, test their results and refine your approach.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical Guide to SCOPE</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background:#f5f5f5; color:#333; line-height:1.6; }
+    pre {
+      background:#fff; border:1px solid #ccc; padding:1rem; white-space:pre-wrap; word-wrap:break-word;
+      max-width: 900px; margin:auto; overflow-x:auto;
+    }
+    .button {
+      display:inline-block; margin-top:2rem; background:#2a597e; color:#fff;
+      padding:0.75rem 1.25rem; border-radius:6px; text-decoration:none; font-weight:bold;
+    }
+    h1 { text-align:center; color:#2a597e; }
+  </style>
+</head>
+<body>
+  <h1>Practical Guide to SCOPE</h1>
+  <pre>
+<!-- Paste the full text of SCOPE_practical_grimoire_tts_final_processed.txt here -->
+  </pre>
+
+  <p style="text-align:center;">
+    <a href="index.html" class="button">← Back to Tracker</a>
+  </p>
+</body>
+</html>
