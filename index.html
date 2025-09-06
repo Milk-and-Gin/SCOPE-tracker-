@@ -4,18 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modern Magik Ritual Tracker</title>
+  <!-- Link the app icon (JPEG will be resized automatically by the OS) -->
+  <link rel="icon" type="image/jpeg" sizes="192x192" href="9114919B-E126-4262-A8E6-0EED272FEF37.jpeg">
+  <link rel="apple-touch-icon" href="9114919B-E126-4262-A8E6-0EED272FEF37.jpeg">
+  <!-- Reference the inline manifest -->
+  <link rel="manifest" href="#manifest">
+  <!-- Set the address bar color on mobile -->
+  <meta name="theme-color" content="#58318b">
   <style>
+    /* Brutalist‑inspired styling: neutral palette, simple geometry, strong typography */
     :root {
-      --bg-color: #f3f3f3;
-      --surface-color: #ffffff;
+      --bg-color:     #f3f3f3;
+      --surface-color:#ffffff;
       --border-color: #d0d0d0;
-      --text-color: #1f1f1f;
-      --muted-color: #666666;
+      --text-color:   #1f1f1f;
+      --muted-color:  #666666;
       --accent-color: #58318b;
     }
     body {
       margin: 0;
-      padding-bottom: 6rem;
+      padding-bottom: 6rem; /* space for the floating button */
       background: var(--bg-color);
       color: var(--text-color);
       font-family: "Roboto Mono", monospace;
@@ -103,11 +111,13 @@
       margin-top: 0.25rem;
       color: var(--muted-color);
     }
-    .output-row { margin-bottom: 1rem; }
+    .output-row {
+      margin-bottom: 1rem;
+    }
     .output-bar {
       position: relative;
       width: 100%;
-      height: 2rem;
+      height: 2rem; /* bigger bar for visibility */
       background: var(--border-color);
     }
     .output-fill {
@@ -140,8 +150,8 @@
       cursor: pointer;
       color: #fff;
     }
-    #save { background: var(--accent-color); }
-    #download { background: var(--text-color); }
+    #save    { background: var(--accent-color); }
+    #download{ background: var(--text-color); }
     .floating-link {
       position: fixed;
       bottom: 1rem;
@@ -157,7 +167,9 @@
       transition: opacity 0.3s;
       z-index: 1000;
     }
-    .floating-link:hover { opacity: 1; }
+    .floating-link:hover {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -167,6 +179,7 @@
   </header>
   <main>
     <form id="scope-form">
+      <!-- Meta Section -->
       <div class="card">
         <h3>Meta</h3>
         <label><span>Date</span><input type="date" id="date"></label>
@@ -174,6 +187,7 @@
         <label><span>Tradition</span><input type="text" id="tradition"></label>
         <label><span>Goal</span><input type="text" id="goal"></label>
       </div>
+      <!-- Inputs Section -->
       <div class="card">
         <h3>Inputs (0–1 scale)</h3>
         <label><span>Attention A</span><input type="range" id="aFocus" min="0" max="1" step="0.25" value="0"><span class="range-value" id="aFocusVal">0.00</span></label>
@@ -187,6 +201,7 @@
         <label><span>Vitality V</span><input type="range" id="vVitality" min="0" max="1" step="0.25" value="0"><span class="range-value" id="vVitalityVal">0.00</span></label>
         <label><span>Noise Q</span><input type="range" id="qNoise" min="0" max="1" step="0.25" value="1"><span class="range-value" id="qNoiseVal">1.00</span></label>
       </div>
+      <!-- Outputs Section -->
       <div class="card">
         <h3>Outputs</h3>
         <div class="output-row">
@@ -208,8 +223,34 @@
     <p id="status"></p>
   </main>
   <a class="floating-link" href="https://www.milkandgin.co.uk/scope" target="_blank">Read More About SCOPE</a>
+
+  <!-- Inline PWA manifest -->
+  <script id="manifest" type="application/manifest+json">
+  {
+    "name": "Modern Magik Ritual Tracker",
+    "short_name": "Magik",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f3f3f3",
+    "theme_color": "#58318b",
+    "icons": [
+      {
+        "src": "9114919B-E126-4262-A8E6-0EED272FEF37.jpeg",
+        "sizes": "192x192",
+        "type": "image/jpeg",
+        "purpose": "maskable any"
+      },
+      {
+        "src": "9114919B-E126-4262-A8E6-0EED272FEF37.jpeg",
+        "sizes": "512x512",
+        "type": "image/jpeg"
+      }
+    ]
+  }
+  </script>
+
   <script>
-    // Form and element references
+    // Element references
     const inputs = {
       aFocus: document.getElementById('aFocus'),
       bBelief: document.getElementById('bBelief'),
@@ -240,7 +281,7 @@
     const pStarVal = document.getElementById('pStarVal');
     const status   = document.getElementById('status');
 
-    // Compute Psi and PStar, then scale for display
+    // Compute efficacy and probability, scale for display
     function compute() {
       const A = parseFloat(inputs.aFocus.value) || 0;
       const B = parseFloat(inputs.bBelief.value) || 0;
@@ -248,52 +289,49 @@
       const R = parseFloat(inputs.rRes.value) || 0;
       const S = parseFloat(inputs.sSkill.value) || 0;
       const L = parseFloat(inputs.lLink.value) || 0;
-      const Rp = parseFloat(inputs.rRepr.value) || 0;
+      const Rp= parseFloat(inputs.rRepr.value) || 0;
       const C = parseFloat(inputs.cCoord.value) || 0;
       const V = parseFloat(inputs.vVitality.value) || 0;
       const Q = parseFloat(inputs.qNoise.value) || 0;
 
-      // Efficacy (Psi) calculation
+      // Multiply factors
       const H = A * B * (1 - D) * (1 - R);
       const X = S * L * Rp * C;
       const Psi = H * X * V * Q;
-
       const baseline = 0.5;
       const PStar = baseline + (1 - baseline) * Psi;
 
-      const psiClamped = Math.max(0, Math.min(1, Psi));
+      const psiClamped   = Math.max(0, Math.min(1, Psi));
       const pStarClamped = Math.max(0, Math.min(1, PStar));
 
-      // Cube root scaling makes small values more visible without saturating too quickly
-      const psiDisplay = Math.pow(psiClamped, 1/3);
+      // Linear scaling: Psi ×10 and P* deviation ×5 for clear visual movement
+      const psiDisplay   = Math.min(psiClamped * 10, 1);
+      const pStarDisplay = Math.min(baseline + (pStarClamped - baseline) * 5, 1);
 
-      // Scale P* relative to baseline: values above 0.5 expand, below 0.5 shrink
-      const pStarDisplay = Math.min(baseline + (pStarClamped - baseline) * 2, 1);
-
-      psiBar.style.width = (psiDisplay * 100) + '%';
+      psiBar.style.width   = (psiDisplay  * 100) + '%';
       pStarBar.style.width = (pStarDisplay * 100) + '%';
 
-      psiVal.textContent = psiClamped.toFixed(3);
+      psiVal.textContent   = psiClamped.toFixed(3);
       pStarVal.textContent = pStarClamped.toFixed(3);
 
       return { Psi: psiClamped, PStar: pStarClamped };
     }
 
-    // Update slider display values
+    // Update numeric slider values
     function updateDisplay() {
-      spans.aFocusVal.textContent = parseFloat(inputs.aFocus.value).toFixed(2);
-      spans.bBeliefVal.textContent = parseFloat(inputs.bBelief.value).toFixed(2);
-      spans.dAttachVal.textContent = parseFloat(inputs.dAttach.value).toFixed(2);
-      spans.rResVal.textContent = parseFloat(inputs.rRes.value).toFixed(2);
-      spans.sSkillVal.textContent = parseFloat(inputs.sSkill.value).toFixed(2);
-      spans.lLinkVal.textContent = parseFloat(inputs.lLink.value).toFixed(2);
-      spans.rReprVal.textContent = parseFloat(inputs.rRepr.value).toFixed(2);
-      spans.cCoordVal.textContent = parseFloat(inputs.cCoord.value).toFixed(2);
+      spans.aFocusVal.textContent    = parseFloat(inputs.aFocus.value).toFixed(2);
+      spans.bBeliefVal.textContent   = parseFloat(inputs.bBelief.value).toFixed(2);
+      spans.dAttachVal.textContent   = parseFloat(inputs.dAttach.value).toFixed(2);
+      spans.rResVal.textContent      = parseFloat(inputs.rRes.value).toFixed(2);
+      spans.sSkillVal.textContent    = parseFloat(inputs.sSkill.value).toFixed(2);
+      spans.lLinkVal.textContent     = parseFloat(inputs.lLink.value).toFixed(2);
+      spans.rReprVal.textContent     = parseFloat(inputs.rRepr.value).toFixed(2);
+      spans.cCoordVal.textContent    = parseFloat(inputs.cCoord.value).toFixed(2);
       spans.vVitalityVal.textContent = parseFloat(inputs.vVitality.value).toFixed(2);
-      spans.qNoiseVal.textContent = parseFloat(inputs.qNoise.value).toFixed(2);
+      spans.qNoiseVal.textContent    = parseFloat(inputs.qNoise.value).toFixed(2);
     }
 
-    // Store the latest entry in localStorage
+    // Persist latest entry in localStorage
     function updateLatestEntry() {
       const { Psi, PStar } = compute();
       const entry = {
@@ -301,16 +339,16 @@
         location: document.getElementById('location').value,
         tradition: document.getElementById('tradition').value,
         goal: document.getElementById('goal').value,
-        A: parseFloat(inputs.aFocus.value) || 0,
-        B: parseFloat(inputs.bBelief.value) || 0,
-        D: parseFloat(inputs.dAttach.value) || 0,
-        R: parseFloat(inputs.rRes.value) || 0,
-        S: parseFloat(inputs.sSkill.value) || 0,
-        L: parseFloat(inputs.lLink.value) || 0,
-        Rp: parseFloat(inputs.rRepr.value) || 0,
-        C: parseFloat(inputs.cCoord.value) || 0,
-        V: parseFloat(inputs.vVitality.value) || 0,
-        Q: parseFloat(inputs.qNoise.value) || 0,
+        A:  parseFloat(inputs.aFocus.value)   || 0,
+        B:  parseFloat(inputs.bBelief.value)  || 0,
+        D:  parseFloat(inputs.dAttach.value)  || 0,
+        R:  parseFloat(inputs.rRes.value)     || 0,
+        S:  parseFloat(inputs.sSkill.value)   || 0,
+        L:  parseFloat(inputs.lLink.value)    || 0,
+        Rp: parseFloat(inputs.rRepr.value)    || 0,
+        C:  parseFloat(inputs.cCoord.value)   || 0,
+        V:  parseFloat(inputs.vVitality.value)|| 0,
+        Q:  parseFloat(inputs.qNoise.value)   || 0,
         Psi,
         PStar,
         ts: new Date().toISOString()
@@ -318,33 +356,33 @@
       localStorage.setItem('modernMagikLatest', JSON.stringify(entry));
     }
 
-    // Restore values from the most recent entry (if it exists)
+    // Reload last saved values
     function loadLatestEntry() {
       const data = localStorage.getItem('modernMagikLatest');
       if (data) {
-      try {
-        const entry = JSON.parse(data);
-        document.getElementById('date').value = entry.date || '';
-        document.getElementById('location').value = entry.location || '';
-        document.getElementById('tradition').value = entry.tradition || '';
-        document.getElementById('goal').value = entry.goal || '';
-        inputs.aFocus.value = entry.A;
-        inputs.bBelief.value = entry.B;
-        inputs.dAttach.value = entry.D;
-        inputs.rRes.value = entry.R;
-        inputs.sSkill.value = entry.S;
-        inputs.lLink.value = entry.L;
-        inputs.rRepr.value = entry.Rp;
-        inputs.cCoord.value = entry.C;
-        inputs.vVitality.value = entry.V;
-        inputs.qNoise.value = entry.Q;
-      } catch (e) {
-        console.error('Error reading stored data:', e);
-      }
+        try {
+          const entry = JSON.parse(data);
+          document.getElementById('date').value     = entry.date || '';
+          document.getElementById('location').value = entry.location || '';
+          document.getElementById('tradition').value= entry.tradition || '';
+          document.getElementById('goal').value     = entry.goal || '';
+          inputs.aFocus.value    = entry.A || 0;
+          inputs.bBelief.value   = entry.B || 0;
+          inputs.dAttach.value   = entry.D || 0;
+          inputs.rRes.value      = entry.R || 0;
+          inputs.sSkill.value    = entry.S || 0;
+          inputs.lLink.value     = entry.L || 0;
+          inputs.rRepr.value     = entry.Rp || 0;
+          inputs.cCoord.value    = entry.C || 0;
+          inputs.vVitality.value= entry.V || 0;
+          inputs.qNoise.value    = entry.Q || 0;
+        } catch (e) {
+          console.error('Error loading entry:', e);
+        }
       }
     }
 
-    // Append saved entry to history
+    // Save entry to history
     function saveEntry() {
       updateLatestEntry();
       const entry = JSON.parse(localStorage.getItem('modernMagikLatest'));
@@ -355,7 +393,7 @@
       setTimeout(() => { status.textContent = ''; }, 2000);
     }
 
-    // Download the most recent entry as JSON
+    // Download latest entry
     function downloadLatest() {
       let latest = localStorage.getItem('modernMagikLatest');
       if (!latest) {
@@ -363,13 +401,13 @@
         latest = localStorage.getItem('modernMagikLatest');
       }
       const blob = new Blob([latest], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      anchor.download = 'modern-magik-latest.json';
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'modern-magik-latest.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
       status.textContent = 'File downloaded.';
       setTimeout(() => { status.textContent = ''; }, 2000);
@@ -389,7 +427,7 @@
     });
     document.getElementById('download').addEventListener('click', downloadLatest);
 
-    // Initialisation on page load
+    // Initialise on load: restore previous entry and compute
     loadLatestEntry();
     updateDisplay();
     compute();
