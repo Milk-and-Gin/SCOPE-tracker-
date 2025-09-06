@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Magik Ritual Tracker</title>
-  <!-- Brutalist-inspired styles: neutral palette, strong typography, minimal ornamentation -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Magik Ritual Tracker</title>
   <style>
     :root {
       --bg-color: #f3f3f3;
@@ -13,11 +12,10 @@
       --text-color: #1f1f1f;
       --muted-color: #666666;
       --accent-color: #58318b;
-      --accent-secondary: #794d9c;
     }
     body {
       margin: 0;
-      padding: 0 0 6rem 0; /* space for floating link */
+      padding: 0 0 6rem 0;
       background: var(--bg-color);
       color: var(--text-color);
       font-family: "Roboto Mono", monospace;
@@ -26,23 +24,21 @@
     header {
       background: var(--surface-color);
       border-bottom: 4px solid var(--border-color);
-      padding: 2rem 1rem 1rem 1rem;
+      padding: 2rem 1rem 1rem;
       text-align: center;
     }
     header h1 {
       margin: 0;
-      font-size: 1.75rem;
+      font-size: 2rem;
       font-weight: 700;
-      letter-spacing: 0.1rem;
       text-transform: uppercase;
     }
     header h2 {
-      margin: 0.25rem 0 0;
-      font-size: 1rem;
+      margin: 0.3rem 0 0;
+      font-size: 1.1rem;
       font-weight: 500;
-      letter-spacing: 0.05rem;
-      text-transform: uppercase;
       color: var(--muted-color);
+      text-transform: uppercase;
     }
     main {
       max-width: 900px;
@@ -52,30 +48,27 @@
     .card {
       background: var(--surface-color);
       border: 2px solid var(--border-color);
-      padding: 1.25rem;
+      padding: 1.5rem;
       margin-bottom: 1.5rem;
     }
     .card h3 {
       margin-top: 0;
       margin-bottom: 1rem;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05rem;
     }
     label {
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
-      font-size: 0.9rem;
       font-weight: 600;
+      font-size: 0.9rem;
     }
     label span {
       margin-bottom: 0.25rem;
     }
-    input[type="text"],
-    input[type="date"],
-    textarea {
+    input[type="text"], input[type="date"], textarea {
       padding: 0.5rem;
       border: 2px solid var(--border-color);
       background: var(--surface-color);
@@ -83,11 +76,6 @@
       font-size: 0.9rem;
       color: var(--text-color);
     }
-    textarea {
-      resize: vertical;
-      min-height: 3rem;
-    }
-    /* Sliders: rectangular track with square thumb */
     input[type="range"] {
       -webkit-appearance: none;
       width: 100%;
@@ -95,7 +83,6 @@
       background: var(--border-color);
       margin-top: 0.25rem;
       border-radius: 0;
-      cursor: pointer;
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -103,33 +90,22 @@
       width: 1.2rem;
       background: var(--accent-color);
       border: none;
-      border-radius: 0;
       margin-top: -0.1rem;
     }
     input[type="range"]::-webkit-slider-runnable-track {
       height: 1rem;
       background: var(--border-color);
     }
-    input[type="range"]:focus {
-      outline: none;
-    }
     .range-value {
       font-size: 0.75rem;
       margin-top: 0.25rem;
       color: var(--muted-color);
     }
-    /* Outputs as progress bars */
-    .output-row {
-      margin-bottom: 1rem;
-    }
-    .output-label {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
+    .output-row { margin-bottom: 1rem; }
     .output-bar {
       position: relative;
       width: 100%;
-      height: 1.5rem;
+      height: 2rem;
       background: var(--border-color);
     }
     .output-fill {
@@ -147,7 +123,6 @@
       color: var(--muted-color);
       text-align: right;
     }
-    /* Buttons */
     .btn-row {
       display: flex;
       gap: 1rem;
@@ -155,181 +130,116 @@
     }
     button {
       flex: 1;
-      padding: 0.75rem;
+      padding: 0.8rem;
       font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05rem;
       border: none;
       cursor: pointer;
-      color: #ffffff;
+      color: #fff;
     }
-    #save {
-      background: var(--accent-color);
-    }
-    #download {
-      background: var(--text-color);
-    }
-    /* Floating link */
+    #save { background: var(--accent-color); }
+    #download { background: var(--text-color); }
     .floating-link {
       position: fixed;
       bottom: 1rem;
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent-color);
-      color: #ffffff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0;
+      color: #fff;
+      padding: 0.7rem 1.4rem;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.9rem;
-      opacity: 0.7;
-      transition: opacity 0.2s;
+      opacity: 0.65;
+      transition: opacity 0.3s;
       z-index: 1000;
     }
-    .floating-link:hover {
-      opacity: 1;
-    }
+    .floating-link:hover { opacity: 1; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Modern Magik</h1>
-    <h2>Ritual Tracker</h2>
+    <h1>Modern Magik</h1>
+    <h2>Ritual Tracker</h2>
   </header>
   <main>
     <form id="scope-form">
-      <!-- Meta -->
       <div class="card">
         <h3>Meta</h3>
-        <label>
-          <span>Date</span>
-          <input type="date" id="date" />
-        </label>
-        <label>
-          <span>Location</span>
-          <input type="text" id="location" placeholder="e.g. London" />
-        </label>
-        <label>
-          <span>Tradition</span>
-          <input type="text" id="tradition" placeholder="e.g. Vodou" />
-        </label>
-        <label>
-          <span>Goal</span>
-          <input type="text" id="goal" placeholder="Describe your intention" />
-        </label>
+        <label><span>Date</span><input type="date" id="date"></label>
+        <label><span>Location</span><input type="text" id="location" placeholder="e.g. London"></label>
+        <label><span>Tradition</span><input type="text" id="tradition" placeholder="e.g. Vodou, Chaos"></label>
+        <label><span>Goal</span><input type="text" id="goal" placeholder="Describe your intention"></label>
       </div>
-      <!-- Inputs -->
       <div class="card">
-        <h3>Inputs</h3>
-        <label>
-          <span>Attention A</span>
-          <input type="range" id="aFocus" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="aFocusVal">0.00</span>
-        </label>
-        <label>
-          <span>Belief B</span>
-          <input type="range" id="bBelief" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="bBeliefVal">0.00</span>
-        </label>
-        <label>
-          <span>Attachment D</span>
-          <input type="range" id="dAttach" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="dAttachVal">0.00</span>
-        </label>
-        <label>
-          <span>Resistance R</span>
-          <input type="range" id="rRes" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="rResVal">0.00</span>
-        </label>
-        <label>
-          <span>Skill S</span>
-          <input type="range" id="sSkill" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="sSkillVal">0.00</span>
-        </label>
-        <label>
-          <span>Link L</span>
-          <input type="range" id="lLink" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="lLinkVal">0.00</span>
-        </label>
-        <label>
-          <span>Representation Rr</span>
-          <input type="range" id="rRepr" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="rReprVal">0.00</span>
-        </label>
-        <label>
-          <span>Coordination C</span>
-          <input type="range" id="cCoord" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="cCoordVal">0.00</span>
-        </label>
-        <label>
-          <span>Vitality V</span>
-          <input type="range" id="vVitality" min="0" max="1" step="0.25" value="0" />
-          <span class="range-value" id="vVitalityVal">0.00</span>
-        </label>
-        <label>
-          <span>Noise Q</span>
-          <input type="range" id="qNoise" min="0" max="1" step="0.25" value="1" />
-          <span class="range-value" id="qNoiseVal">1.00</span>
-        </label>
+        <h3>Inputs (0–1 scale)</h3>
+        <label><span>Attention A</span><input type="range" id="aFocus" min="0" max="1" step="0.25" value="0"><span class="range-value" id="aFocusVal">0.00</span></label>
+        <label><span>Belief B</span><input type="range" id="bBelief" min="0" max="1" step="0.25" value="0"><span class="range-value" id="bBeliefVal">0.00</span></label>
+        <label><span>Attachment D</span><input type="range" id="dAttach" min="0" max="1" step="0.25" value="0"><span class="range-value" id="dAttachVal">0.00</span></label>
+        <label><span>Resistance R</span><input type="range" id="rRes" min="0" max="1" step="0.25" value="0"><span class="range-value" id="rResVal">0.00</span></label>
+        <label><span>Skill S</span><input type="range" id="sSkill" min="0" max="1" step="0.25" value="0"><span class="range-value" id="sSkillVal">0.00</span></label>
+        <label><span>Link L</span><input type="range" id="lLink" min="0" max="1" step="0.25" value="0"><span class="range-value" id="lLinkVal">0.00</span></label>
+        <label><span>Representation Rr</span><input type="range" id="rRepr" min="0" max="1" step="0.25" value="0"><span class="range-value" id="rReprVal">0.00</span></label>
+        <label><span>Coordination C</span><input type="range" id="cCoord" min="0" max="1" step="0.25" value="0"><span class="range-value" id="cCoordVal">0.00</span></label>
+        <label><span>Vitality V</span><input type="range" id="vVitality" min="0" max="1" step="0.25" value="0"><span class="range-value" id="vVitalityVal">0.00</span></label>
+        <label><span>Noise Q</span><input type="range" id="qNoise" min="0" max="1" step="0.25" value="1"><span class="range-value" id="qNoiseVal">1.00</span></label>
       </div>
-      <!-- Outputs -->
       <div class="card">
         <h3>Outputs</h3>
         <div class="output-row">
           <div class="output-label">Ψ (efficacy)</div>
-          <div class="output-bar">
-            <div class="output-fill" id="psiBar"></div>
-          </div>
+          <div class="output-bar"><div class="output-fill" id="psiBar"></div></div>
           <div class="output-value" id="psiVal">0.000</div>
         </div>
         <div class="output-row">
           <div class="output-label">P* (enchanted probability)</div>
-          <div class="output-bar">
-            <div class="output-fill" id="pStarBar"></div>
-          </div>
+          <div class="output-bar"><div class="output-fill" id="pStarBar"></div></div>
           <div class="output-value" id="pStarVal">0.500</div>
         </div>
         <div class="btn-row">
-          <button type="submit" id="save">Save Entry</button>
-          <button type="button" id="download">Download Latest</button>
+          <button type="submit" id="save">Save Entry</button>
+          <button type="button" id="download">Download Latest</button>
         </div>
       </div>
     </form>
     <p id="status"></p>
   </main>
   <a class="floating-link" href="https://www.milkandgin.co.uk/scope" target="_blank">Read More About SCOPE</a>
+
   <script>
-    // Grab slider elements and display spans
+    // Elements
     const inputs = {
-      aFocus: document.getElementById('aFocus'),
-      bBelief: document.getElementById('bBelief'),
-      dAttach: document.getElementById('dAttach'),
-      rRes: document.getElementById('rRes'),
-      sSkill: document.getElementById('sSkill'),
-      lLink: document.getElementById('lLink'),
-      rRepr: document.getElementById('rRepr'),
-      cCoord: document.getElementById('cCoord'),
-      vVitality: document.getElementById('vVitality'),
-      qNoise: document.getElementById('qNoise')
+      aFocus: document.getElementById("aFocus"),
+      bBelief: document.getElementById("bBelief"),
+      dAttach: document.getElementById("dAttach"),
+      rRes: document.getElementById("rRes"),
+      sSkill: document.getElementById("sSkill"),
+      lLink: document.getElementById("lLink"),
+      rRepr: document.getElementById("rRepr"),
+      cCoord: document.getElementById("cCoord"),
+      vVitality: document.getElementById("vVitality"),
+      qNoise: document.getElementById("qNoise"),
     };
     const spans = {
-      aFocusVal: document.getElementById('aFocusVal'),
-      bBeliefVal: document.getElementById('bBeliefVal'),
-      dAttachVal: document.getElementById('dAttachVal'),
-      rResVal: document.getElementById('rResVal'),
-      sSkillVal: document.getElementById('sSkillVal'),
-      lLinkVal: document.getElementById('lLinkVal'),
-      rReprVal: document.getElementById('rReprVal'),
-      cCoordVal: document.getElementById('cCoordVal'),
-      vVitalityVal: document.getElementById('vVitalityVal'),
-      qNoiseVal: document.getElementById('qNoiseVal')
+      aFocusVal: document.getElementById("aFocusVal"),
+      bBeliefVal: document.getElementById("bBeliefVal"),
+      dAttachVal: document.getElementById("dAttachVal"),
+      rResVal: document.getElementById("rResVal"),
+      sSkillVal: document.getElementById("sSkillVal"),
+      lLinkVal: document.getElementById("lLinkVal"),
+      rReprVal: document.getElementById("rReprVal"),
+      cCoordVal: document.getElementById("cCoordVal"),
+      vVitalityVal: document.getElementById("vVitalityVal"),
+      qNoiseVal: document.getElementById("qNoiseVal"),
     };
-    const psiBar = document.getElementById('psiBar');
-    const pStarBar = document.getElementById('pStarBar');
-    const psiValEl = document.getElementById('psiVal');
-    const pStarValEl = document.getElementById('pStarVal');
+    const psiBar = document.getElementById("psiBar");
+    const pStarBar = document.getElementById("pStarBar");
+    const psiVal = document.getElementById("psiVal");
+    const pStarVal = document.getElementById("pStarVal");
+    const status = document.getElementById("status");
 
+    // Compute efficacy and probability
     function compute() {
       const A = parseFloat(inputs.aFocus.value) || 0;
       const B = parseFloat(inputs.bBelief.value) || 0;
@@ -348,12 +258,17 @@
       const PStar = baseline + (1 - baseline) * Psi;
       const psiClamped = Math.max(0, Math.min(1, Psi));
       const pStarClamped = Math.max(0, Math.min(1, PStar));
-      psiBar.style.width = (psiClamped * 100) + '%';
-      pStarBar.style.width = (pStarClamped * 100) + '%';
-      psiValEl.textContent = psiClamped.toFixed(3);
-      pStarValEl.textContent = pStarClamped.toFixed(3);
+      // Non-linear scaling: 1/4th power
+      const psiDisplay = Math.pow(psiClamped, 0.25);
+      const pStarDisplay = Math.pow(pStarClamped, 0.25);
+      psiBar.style.width = (psiDisplay * 100) + "%";
+      pStarBar.style.width = (pStarDisplay * 100) + "%";
+      psiVal.textContent = psiClamped.toFixed(3);
+      pStarVal.textContent = pStarClamped.toFixed(3);
       return { Psi: psiClamped, PStar: pStarClamped };
     }
+
+    // Update numeric displays for sliders
     function updateDisplay() {
       spans.aFocusVal.textContent = parseFloat(inputs.aFocus.value).toFixed(2);
       spans.bBeliefVal.textContent = parseFloat(inputs.bBelief.value).toFixed(2);
@@ -366,70 +281,88 @@
       spans.vVitalityVal.textContent = parseFloat(inputs.vVitality.value).toFixed(2);
       spans.qNoiseVal.textContent = parseFloat(inputs.qNoise.value).toFixed(2);
     }
-    function saveEntry() {
+
+    // Store the most recent entry
+    function updateLatestEntry() {
       const { Psi, PStar } = compute();
       const entry = {
-        date: document.getElementById('date').value,
-        location: document.getElementById('location').value,
-        tradition: document.getElementById('tradition').value,
-        goal: document.getElementById('goal').value,
-        A_focus: parseFloat(inputs.aFocus.value) || 0,
-        B_belief: parseFloat(inputs.bBelief.value) || 0,
-        D_attach: parseFloat(inputs.dAttach.value) || 0,
-        R_res: parseFloat(inputs.rRes.value) || 0,
-        S_skill: parseFloat(inputs.sSkill.value) || 0,
-        L_link: parseFloat(inputs.lLink.value) || 0,
-        R_repr: parseFloat(inputs.rRepr.value) || 0,
-        C_coord: parseFloat(inputs.cCoord.value) || 0,
-        V_vitality: parseFloat(inputs.vVitality.value) || 0,
-        Q_noise: parseFloat(inputs.qNoise.value) || 0,
+        date: document.getElementById("date").value,
+        location: document.getElementById("location").value,
+        tradition: document.getElementById("tradition").value,
+        goal: document.getElementById("goal").value,
+        A: parseFloat(inputs.aFocus.value) || 0,
+        B: parseFloat(inputs.bBelief.value) || 0,
+        D: parseFloat(inputs.dAttach.value) || 0,
+        R: parseFloat(inputs.rRes.value) || 0,
+        S: parseFloat(inputs.sSkill.value) || 0,
+        L: parseFloat(inputs.lLink.value) || 0,
+        Rp: parseFloat(inputs.rRepr.value) || 0,
+        C: parseFloat(inputs.cCoord.value) || 0,
+        V: parseFloat(inputs.vVitality.value) || 0,
+        Q: parseFloat(inputs.qNoise.value) || 0,
         Psi,
         PStar,
         ts: new Date().toISOString()
       };
-      const existing = JSON.parse(localStorage.getItem('modernMagikEntries') || '[]');
-      existing.push(entry);
-      localStorage.setItem('modernMagikEntries', JSON.stringify(existing));
-      document.getElementById('status').textContent = 'Entry saved.';
-      setTimeout(() => {
-        document.getElementById('status').textContent = '';
-      }, 2000);
+      localStorage.setItem("modernMagikLatest", JSON.stringify(entry));
     }
-    function downloadLatest() {
-      const latest = localStorage.getItem('modernMagikEntries');
-      if (!latest) {
-        document.getElementById('status').textContent = 'No data to download.';
-        setTimeout(() => {
-          document.getElementById('status').textContent = '';
-        }, 2000);
-        return;
+
+    // Save entry to history and update latest
+    function saveEntry() {
+      try {
+        updateLatestEntry();
+        const entry = JSON.parse(localStorage.getItem("modernMagikLatest"));
+        const existing = JSON.parse(localStorage.getItem("modernMagikEntries") || "[]");
+        existing.push(entry);
+        localStorage.setItem("modernMagikEntries", JSON.stringify(existing));
+        status.textContent = "Entry saved.";
+      } catch (e) {
+        status.textContent = "Error saving entry.";
       }
-      const blob = new Blob([latest], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'modern-magik-data.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      document.getElementById('status').textContent = 'Data downloaded.';
-      setTimeout(() => {
-        document.getElementById('status').textContent = '';
-      }, 2000);
+      setTimeout(() => { status.textContent = ""; }, 2000);
     }
-    Object.values(inputs).forEach(input => {
-      input.addEventListener('input', () => {
+
+    // Download the latest entry
+    function downloadLatest() {
+      try {
+        let latest = localStorage.getItem("modernMagikLatest");
+        if (!latest) {
+          updateLatestEntry();
+          latest = localStorage.getItem("modernMagikLatest");
+        }
+        const blob = new Blob([latest], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "modern-magik-latest.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        status.textContent = "File downloaded.";
+      } catch (e) {
+        status.textContent = "Error downloading data.";
+      }
+      setTimeout(() => { status.textContent = ""; }, 2000);
+    }
+
+    // Event listeners
+    Object.values(inputs).forEach(el => {
+      el.addEventListener("input", () => {
         updateDisplay();
+        updateLatestEntry();
         compute();
       });
     });
-    document.getElementById('scope-form').addEventListener('submit', (e) => {
+
+    document.getElementById("scope-form").addEventListener("submit", e => {
       e.preventDefault();
       saveEntry();
     });
-    document.getElementById('download').addEventListener('click', () => {
-      downloadLatest();
-    });
-    // Initialize
+
+    document.getElementById("download").addEventListener("click", downloadLatest);
+
+    // Initialize page
     updateDisplay();
     compute();
   </script>
