@@ -1,132 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SCOPE Ritual Tracker</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Magik Ritual Tracker</title>
+  <!-- Import a modern font for a contemporary feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /*
+      Theme variables allow easy switching between light and dark modes. When the
+      body gains the class `dark-mode` these values are overridden below.
+    */
+    :root {
+      --bg-color: #f9f6ff;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --muted-text: #666666;
+      --accent-color: #4b0082;
+      --accent-secondary: #6a5acd;
+      --header-gradient-start: #4b0082;
+      --header-gradient-end: #1a0032;
+    }
+    body.dark-mode {
+      --bg-color: #141218;
+      --card-bg: #1f1c2b;
+      --text-color: #e2e0e8;
+      --muted-text: #a8a3c1;
+      --accent-color: #8a5cff;
+      --accent-secondary: #b19cd9;
+      --header-gradient-start: #2f0059;
+      --header-gradient-end: #0c001e;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding-bottom: 4rem; /* space for floating footer button */
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    header {
+      background: radial-gradient(circle at top left, var(--header-gradient-start), var(--header-gradient-end));
+      color: #ffffff;
+      padding: 2rem 1rem 3rem 1rem;
+      position: relative;
+      text-align: center;
+    }
+    header .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin: 0;
+      font-weight: 700;
+    }
+    header #modeToggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #ffffff;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    header #modeToggle:hover {
+      transform: scale(1.1);
+    }
+    header .subtitle {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #e0d5ff;
+    }
+    main {
+      max-width: 850px;
+      margin: -2rem auto 0 auto; /* overlap header slightly */
+      padding: 0 1rem;
+    }
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card legend {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    /* labels and inputs */
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-color);
+    }
+    label .icon {
+      display: inline-block;
+      width: 1.2rem;
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    input[type="text"], input[type="date"], textarea {
+      flex: 1;
+      box-sizing: border-box;
+      padding: 0.5rem 0.75rem;
+      margin-left: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+    input[type="range"] {
+      flex: 1;
+      appearance: none;
+      height: 1.2rem;
+      margin-left: 0.5rem;
+      background: var(--card-bg);
+      border-radius: 6px;
+    }
+    /* slider track and thumb styling */
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 0.4rem;
+      border-radius: 5px;
+      background: linear-gradient(to right, var(--accent-color), var(--accent-secondary));
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: var(--accent-color);
+      cursor: pointer;
+      margin-top: -0.4rem;
+      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    input[type="range"]:hover::-webkit-slider-thumb {
+      background: var(--accent-secondary);
+    }
+    /* output bars */
+    .output-container {
+      margin-bottom: 1rem;
+    }
+    .output-container label {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .output-bar {
+      width: 100%;
+      height: 1.5rem;
+      border-radius: 8px;
+      background: #e3d9f5;
+      overflow: hidden;
+    }
+    .output-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-color), var(--accent-secondary));
+      transition: width 0.4s ease;
+    }
+    .output-value {
+      display: block;
+      margin-top: 0.3rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--muted-text);
+    }
+    /* action buttons */
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .buttons button {
+      flex: 1;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+      transition: transform 0.1s;
+    }
+    .buttons button#save {
+      background: var(--accent-color);
+    }
+    .buttons button#download {
+      background: var(--accent-secondary);
+    }
+    .buttons button:hover {
+      transform: translateY(-2px);
+    }
+    #status {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+      transition: opacity 0.4s ease;
+    }
+    /* Floating footer button for external link */
+    .primary-btn {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-color);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+    .primary-btn:hover,
+    .primary-btn:focus,
+    .primary-btn:active {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.05);
+    }
+    @media (max-width: 600px) {
+      .primary-btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.25rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>SCOPE Ritual Tracker</h1>
-    <p>Record your ritual parameters, compute probabilities and track outcomes.</p>
-
-    <!-- ✅ Top button to instructions.html -->
-    <p style="text-align:center; margin-top:1rem;">
-      <a href="instructions.html"
-         style="background-color:#2a597e; 
-                color:#fff; 
-                padding:0.75rem 1.25rem; 
-                border-radius:6px; 
-                text-decoration:none; 
-                font-weight:bold;">
-        📘 How the SCOPE Equation Works
-      </a>
-    </p>
+    <div class="header-content">
+      <h1>Modern Magik Ritual Tracker</h1>
+      <!-- Dark mode toggle button -->
+      <button id="modeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+    <p class="subtitle">Record your ritual parameters, compute probabilities & track outcomes.</p>
   </header>
-
   <main>
     <form id="scope-form">
-      <fieldset>
-        <legend>Meta Information</legend>
-        <label>
-          Date:
-          <input type="date" id="date" required />
-        </label>
-        <label>
-          Location:
-          <input type="text" id="location" placeholder="e.g. London" />
-        </label>
-        <label>
-          Tradition:
-          <input type="text" id="tradition" placeholder="e.g. Vodou, Chaos, Hoodoo" />
-        </label>
-        <label class="full-width">
-          Goal statement:
-          <input type="text" id="goal" placeholder="Describe your intention" required />
-        </label>
-        <label class="full-width">
-          Reference class (baseline description):
-          <textarea id="refClass" rows="2" placeholder="What makes this situation similar/different?"></textarea>
-        </label>
-        <label>
-          Baseline Probability P (0–1):
-          <input type="number" id="baselineP" min="0" max="1" step="0.01" value="0.5" required />
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Inputs (0–1 scale)</legend>
-        <label>Attention A_focus:
-          <input type="number" id="aFocus" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Belief B_belief:
-          <input type="number" id="bBelief" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Attachment D_attach:
-          <input type="number" id="dAttach" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Resistance R_res:
-          <input type="number" id="rRes" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Skill S_skill:
-          <input type="number" id="sSkill" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Link L_link:
-          <input type="number" id="lLink" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Representation R_repr:
-          <input type="number" id="rRepr" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Coordination C_coord:
-          <input type="number" id="cCoord" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Vitality V:
-          <input type="number" id="vVitality" min="0" max="1" step="0.01" value="0.0" />
-        </label>
-        <label>Noise Q:
-          <input type="number" id="qNoise" min="0" max="1" step="0.01" value="1.0" />
-        </label>
-        <label>κ (kappa):
-          <input type="number" id="kappa" min="0" max="10" step="0.01" value="1.0" />
-        </label>
-      </fieldset>
-
-      <fieldset id="outputs">
-        <legend>Outputs</legend>
-        <p>Ψ (efficacy): <span id="psi">0.00</span></p>
-        <p>Enchanted Probability P*: <span id="pStar">0.00</span></p>
-      </fieldset>
-
-      <div class="buttons">
-        <button type="submit" id="save">Save Entry</button>
-        <button type="button" id="export">Export Data</button>
+      <div class="card">
+        <fieldset>
+          <legend>Meta</legend>
+          <label><span class="icon">📅</span>Date:<input type="date" id="date"></label>
+          <label><span class="icon">📍</span>Location:<input type="text" id="location" placeholder="e.g. London"></label>
+          <label><span class="icon">📜</span>Tradition:<input type="text" id="tradition" placeholder="e.g. Vodou, Chaos"></label>
+          <label><span class="icon">🎯</span>Goal:<input type="text" id="goal" placeholder="Describe your intention"></label>
+        </fieldset>
+      </div>
+      <div class="card">
+        <fieldset>
+          <legend>Inputs (0–1 scale)</legend>
+          <label><span class="icon">🎯</span>Attention A<input type="range" id="aFocus" min="0" max="1" step="0.25" value="0"><span class="value" id="aFocusVal">0</span></label>
+          <label><span class="icon">✨</span>Belief B<input type="range" id="bBelief" min="0" max="1" step="0.25" value="0"><span class="value" id="bBeliefVal">0</span></label>
+          <label><span class="icon">🔗</span>Attachment D<input type="range" id="dAttach" min="0" max="1" step="0.25" value="0"><span class="value" id="dAttachVal">0</span></label>
+          <label><span class="icon">✋</span>Resistance R<input type="range" id="rRes" min="0" max="1" step="0.25" value="0"><span class="value" id="rResVal">0</span></label>
+          <label><span class="icon">🎓</span>Skill S<input type="range" id="sSkill" min="0" max="1" step="0.25" value="0"><span class="value" id="sSkillVal">0</span></label>
+          <label><span class="icon">🧬</span>Link L<input type="range" id="lLink" min="0" max="1" step="0.25" value="0"><span class="value" id="lLinkVal">0</span></label>
+          <label><span class="icon">🖼</span>Representation Rr<input type="range" id="rRepr" min="0" max="1" step="0.25" value="0"><span class="value" id="rReprVal">0</span></label>
+          <label><span class="icon">🤝</span>Coordination C<input type="range" id="cCoord" min="0" max="1" step="0.25" value="0"><span class="value" id="cCoordVal">0</span></label>
+          <label><span class="icon">💪</span>Vitality V<input type="range" id="vVitality" min="0" max="1" step="0.25" value="0"><span class="value" id="vVitalityVal">0</span></label>
+          <label><span class="icon">🔊</span>Noise Q<input type="range" id="qNoise" min="0" max="1" step="0.25" value="1"><span class="value" id="qNoiseVal">1</span></label>
+        </fieldset>
+      </div>
+      <div class="card">
+        <fieldset id="outputs">
+          <legend>Outputs</legend>
+          <div class="output-container">
+            <label>Ψ (efficacy)</label>
+            <div class="output-bar"><div class="output-fill" id="psiBar"></div></div>
+            <span class="output-value" id="psiVal">0.000</span>
+          </div>
+          <div class="output-container">
+            <label>P* (enchanted probability)</label>
+            <div class="output-bar"><div class="output-fill" id="pStarBar"></div></div>
+            <span class="output-value" id="pStarVal">0.500</span>
+          </div>
+        </fieldset>
+        <div class="buttons">
+          <button type="submit" id="save">Save Entry</button>
+          <button type="button" id="download">Download Latest</button>
+        </div>
       </div>
     </form>
     <p id="status"></p>
   </main>
-
-  <footer>
-    <p class="small">
-      Improvements to the lowest-scored factor yield the biggest gain. Use this form to
-      prioritise your practice and calibrate κ after 15–20 rituals.
-    </p>
-  </footer>
-
-  <!-- ✅ Bottom button to Wix site -->
-  <p style="text-align:center; margin-top:2rem;">
-    <a href="https://www.milkandgin.co.uk/scope" target="_blank"
-       style="background-color:#2a597e; 
-              color:#fff; 
-              padding:0.75rem 1.25rem; 
-              border-radius:6px; 
-              text-decoration:none; 
-              font-weight:bold;">
-      🌐 Read More About SCOPE
-    </a>
-  </p>
-
-  <script src="main.js" defer></script>
+  <!-- floating external link button -->
+  <a href="https://www.milkandgin.co.uk/scope" target="_blank" class="primary-btn">🌐 Read More About SCOPE</a>
+  <script>
+    // Map inputs to elements
+    const inputs = {
+      aFocus: document.getElementById('aFocus'),
+      bBelief: document.getElementById('bBelief'),
+      dAttach: document.getElementById('dAttach'),
+      rRes: document.getElementById('rRes'),
+      sSkill: document.getElementById('sSkill'),
+      lLink: document.getElementById('lLink'),
+      rRepr: document.getElementById('rRepr'),
+      cCoord: document.getElementById('cCoord'),
+      vVitality: document.getElementById('vVitality'),
+      qNoise: document.getElementById('qNoise')
+    };
+    const spans = {
+      aFocusVal: document.getElementById('aFocusVal'),
+      bBeliefVal: document.getElementById('bBeliefVal'),
+      dAttachVal: document.getElementById('dAttachVal'),
+      rResVal: document.getElementById('rResVal'),
+      sSkillVal: document.getElementById('sSkillVal'),
+      lLinkVal: document.getElementById('lLinkVal'),
+      rReprVal: document.getElementById('rReprVal'),
+      cCoordVal: document.getElementById('cCoordVal'),
+      vVitalityVal: document.getElementById('vVitalityVal'),
+      qNoiseVal: document.getElementById('qNoiseVal')
+    };
+    // compute Psi and PStar
+    function compute() {
+      const A = parseFloat(inputs.aFocus.value);
+      const B = parseFloat(inputs.bBelief.value);
+      const D = parseFloat(inputs.dAttach.value);
+      const R = parseFloat(inputs.rRes.value);
+      const S = parseFloat(inputs.sSkill.value);
+      const L = parseFloat(inputs.lLink.value);
+      const Rp = parseFloat(inputs.rRepr.value);
+      const C = parseFloat(inputs.cCoord.value);
+      const V = parseFloat(inputs.vVitality.value);
+      const Q = parseFloat(inputs.qNoise.value);
+      const H = A * B * (1 - D) * (1 - R);
+      const X = S * L * Rp * C;
+      const Psi = H * X * V * Q;
+      const P = 0.5;
+      const PStar = P + (1 - P) * Psi;
+      // update bars
+      document.getElementById('psiBar').style.width = (Psi * 100) + '%';
+      document.getElementById('pStarBar').style.width = (PStar * 100) + '%';
+      document.getElementById('psiVal').textContent = Psi.toFixed(3);
+      document.getElementById('pStarVal').textContent = PStar.toFixed(3);
+      return { Psi, PStar };
+    }
+    // update slider labels and compute
+    Object.keys(inputs).forEach(key => {
+      inputs[key].addEventListener('input', () => {
+        spans[key + 'Val'].textContent = inputs[key].value;
+        compute();
+        autoSave();
+      });
+    });
+    // auto-save the latest entry to local storage
+    function autoSave() {
+      const { Psi, PStar } = compute();
+      const entry = {
+        date: document.getElementById('date').value,
+        location: document.getElementById('location').value,
+        tradition: document.getElementById('tradition').value,
+        goal: document.getElementById('goal').value,
+        A: +inputs.aFocus.value,
+        B: +inputs.bBelief.value,
+        D: +inputs.dAttach.value,
+        R: +inputs.rRes.value,
+        S: +inputs.sSkill.value,
+        L: +inputs.lLink.value,
+        Rp: +inputs.rRepr.value,
+        C: +inputs.cCoord.value,
+        V: +inputs.vVitality.value,
+        Q: +inputs.qNoise.value,
+        Psi,
+        PStar,
+        ts: new Date().toISOString()
+      };
+      localStorage.setItem('modernMagikLatest', JSON.stringify(entry));
+    }
+    document.getElementById('scope-form').addEventListener('submit', e => {
+      e.preventDefault();
+      autoSave();
+      const statusEl = document.getElementById('status');
+      statusEl.textContent = 'Entry saved locally.';
+      setTimeout(() => { statusEl.textContent = ''; }, 2000);
+    });
+    document.getElementById('download').addEventListener('click', () => {
+      const entry = localStorage.getItem('modernMagikLatest');
+      if (!entry) {
+        document.getElementById('status').textContent = 'No data yet.';
+        return;
+      }
+      const blob = new Blob([entry], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'modern-magik-latest.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      document.getElementById('status').textContent = 'File downloaded.';
+      setTimeout(() => { document.getElementById('status').textContent = ''; }, 2000);
+    });
+    // dark mode toggle
+    document.getElementById('modeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const modeBtn = document.getElementById('modeToggle');
+      modeBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+    // initial compute
+    compute();
+  </script>
 </body>
 </html>
